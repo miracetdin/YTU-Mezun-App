@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navy_blue">
+
+    <ImageView
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:background="@drawable/ytu_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80sp"/>
+
+    <TextView
+        android:id="@+id/login_tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/li_welcome"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="215sp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail"
+        android:textColor="@color/white"
+        android:layout_alignStart="@id/login_tv_welcome"
+        android:layout_marginTop="270sp"/>
+
+    <EditText
+        android:id="@+id/login_et_email"
+        android:layout_width="240sp"
+        android:layout_height="30dp"
+        android:layout_marginTop="300sp"
+        android:layout_alignStart="@id/login_tv_welcome"
+        android:layout_toEndOf="@id/login_tv_welcome"
+        android:theme="@style/ThemeOverlay.Material3.TextInputEditText"
+        android:background="@color/white"
+        android:hint="kullanici@mail.com"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="2dp"
+        android:textColorHint="@color/gray"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/li_password"
+        android:textColor="@color/white"
+        android:layout_alignStart="@id/login_tv_welcome"
+        android:layout_marginTop="360sp"/>
+
+    <EditText
+        android:id="@+id/login_et_password"
+        android:layout_width="240sp"
+        android:layout_height="30dp"
+        android:layout_marginTop="390sp"
+        android:layout_alignStart="@id/login_tv_welcome"
+        android:layout_toEndOf="@id/login_tv_welcome"
+        android:inputType="textPassword"
+        android:theme="@style/ThemeOverlay.Material3.TextInputEditText"
+        android:background="@color/white"
+        android:hint="@string/li_input_password"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="2dp"
+        android:textColorHint="@color/gray"/>
+
+
+    <Button
+        android:id="@+id/login_bt_login"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_li_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="460sp"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/login_bt_register"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_li_signup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="520sp"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

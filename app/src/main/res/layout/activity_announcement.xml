@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Announcement"
+    android:background="@color/navy_blue">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar_announcement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Toolbar
+            android:id="@+id/toolbar_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/navy_blue"
+            app:popupTheme="@style/Widget.AppCompat.PopupMenu"
+            android:titleTextColor="@color/yellow"
+            android:title="@string/tb_announcements"
+            android:titleMarginStart="137dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:backgroundTint="@color/yellow"
+        android:layout_below="@id/bar_announcement"
+        android:layout_marginBottom="90dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="530dp">
+
+        <Button
+            android:id="@+id/mb_profile"
+            android:layout_width="180dp"
+            android:layout_height="90dp"
+            android:text="@string/mb_profile_text"
+            android:textColor="@color/gray"
+            android:backgroundTint="@color/navy_blue_background"/>
+
+        <Button
+            android:id="@+id/mb_announcement"
+            android:layout_width="180dp"
+            android:layout_height="90dp"
+            android:text="@string/mb_announcement_text"
+            android:textColor="@color/yellow"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
