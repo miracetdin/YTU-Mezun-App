@@ -202,6 +202,15 @@ public class Register extends AppCompatActivity {
                                     mData.put("email_address", email.getText().toString());
                                     mData.put("profile_photo", currentPhotoPath.toString());
                                     mData.put("sifre", password.getText().toString());
+                                    mData.put("lisans", "");
+                                    mData.put("yuksek_lisans", "");
+                                    mData.put("doktora", "");
+                                    mData.put("ulke", "");
+                                    mData.put("sehir", "");
+                                    mData.put("firma", "");
+                                    mData.put("linkedin", "");
+                                    mData.put("twitter", "");
+                                    mData.put("telefon", "");
 
                                     mReference.getReference().child("Kullanicilar").child(mUser.getUid()).setValue(mData)
                                             .addOnCompleteListener(Register.this, new OnCompleteListener<Void>() {
