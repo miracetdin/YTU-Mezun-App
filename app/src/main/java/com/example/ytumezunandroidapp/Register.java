@@ -201,13 +201,15 @@ public class Register extends AppCompatActivity {
                                     mData.put("mezuniyet_yili", graduationYear.getText().toString());
                                     mData.put("email_address", email.getText().toString());
                                     mData.put("profile_photo", currentPhotoPath.toString());
+                                    mData.put("sifre", password.getText().toString());
 
                                     mReference.getReference().child("Kullanicilar").child(mUser.getUid()).setValue(mData)
                                             .addOnCompleteListener(Register.this, new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()){
-                                                        Toast.makeText(Register.this, "Kayıt İşlemi Başarılı!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(Register.this, "Kayıt İşlemi Başarılı, Giriş Yapınız.", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(getApplicationContext(), Login.class);
                                                     }
                                                     else{
                                                         Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

@@ -9,7 +9,7 @@
         android:layout_height="120sp"
         android:background="@drawable/ytu_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80sp"/>
+        android:layout_marginTop="50sp"/>
 
     <TextView
         android:id="@+id/login_tv_welcome"
@@ -19,7 +19,7 @@
         android:textColor="@color/white"
         android:fontFamily="sans-serif-light"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="215sp"/>
+        android:layout_marginTop="185sp"/>
 
 
     <TextView
@@ -28,13 +28,13 @@
         android:text="E-mail"
         android:textColor="@color/white"
         android:layout_alignStart="@id/login_tv_welcome"
-        android:layout_marginTop="270sp"/>
+        android:layout_marginTop="230sp"/>
 
     <EditText
         android:id="@+id/login_et_email"
         android:layout_width="240sp"
         android:layout_height="30dp"
-        android:layout_marginTop="300sp"
+        android:layout_marginTop="260sp"
         android:layout_alignStart="@id/login_tv_welcome"
         android:layout_toEndOf="@id/login_tv_welcome"
         android:theme="@style/ThemeOverlay.Material3.TextInputEditText"
@@ -52,13 +52,13 @@
         android:text="@string/li_password"
         android:textColor="@color/white"
         android:layout_alignStart="@id/login_tv_welcome"
-        android:layout_marginTop="360sp"/>
+        android:layout_marginTop="320sp"/>
 
     <EditText
         android:id="@+id/login_et_password"
         android:layout_width="240sp"
         android:layout_height="30dp"
-        android:layout_marginTop="390sp"
+        android:layout_marginTop="350sp"
         android:layout_alignStart="@id/login_tv_welcome"
         android:layout_toEndOf="@id/login_tv_welcome"
         android:inputType="textPassword"
@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:text="@string/bt_li_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="460sp"
+        android:layout_marginTop="410sp"
         android:backgroundTint="@color/yellow"
         android:textColor="@color/white"/>
 
@@ -87,7 +87,17 @@
         android:layout_height="wrap_content"
         android:text="@string/bt_li_signup"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="520sp"
+        android:layout_marginTop="470sp"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/login_bt_forgotMyPassword"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:text="Şifremi Unuttum"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550sp"
         android:backgroundTint="@color/yellow"
         android:textColor="@color/white"/>
 

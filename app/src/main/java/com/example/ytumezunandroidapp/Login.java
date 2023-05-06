@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     EditText email, password;
-    Button login, register;
+    Button login, register, resetPassword;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private DatabaseReference mReference;
@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity {
 
         login = (Button) findViewById(R.id.login_bt_login);
         register = (Button) findViewById(R.id.login_bt_register);
+        resetPassword = (Button) findViewById(R.id.login_bt_forgotMyPassword) ;
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,14 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Register.class);
+                startActivity(intent);
+            }
+        });
+
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ResetPassword.class);
                 startActivity(intent);
             }
         });
