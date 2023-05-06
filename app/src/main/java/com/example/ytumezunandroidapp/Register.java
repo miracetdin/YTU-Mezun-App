@@ -25,13 +25,17 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.play.integrity.internal.m;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
 
@@ -42,7 +46,10 @@ public class Register extends AppCompatActivity {
     Button register, takePhoto;
     String currentPhotoPath;
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mReference;
+    private HashMap<String, Object> mData;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +76,13 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(password.getText().toString().equals(password2.getText().toString())) {
-                    register_user(v);
+                    if(!TextUtils.isEmpty(name.getText().toString()) && !TextUtils.isEmpty(surname.getText().toString())
+                        && !TextUtils.isEmpty(email.getText().toString()) && !TextUtils.isEmpty(password.getText().toString())){
+                        register_user(v);
+                    }
+                    else{
+                        Toast.makeText(Register.this, "Ad, Soyad, E-posta ve Şifre Alanları Boş Bırakılamaz!", Toast.LENGTH_SHORT).show();
+                    }
                     //Toast.makeText(Register.this, "Kayıt başarılı bir şekilde gerçekleşmiştir. Giriş yapınız.", Toast.LENGTH_LONG).show();
                     // Kayıt ekranında alınan bilgilerle kullanıcı oluşturma
                     /*
@@ -79,6 +92,9 @@ public class Register extends AppCompatActivity {
                     startActivity(intent);
 
                      */
+                }
+                else{
+                    Toast.makeText(Register.this, "Girilen Şifreler Aynı Değil!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -91,6 +107,7 @@ public class Register extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
+        mReference = FirebaseDatabase.getInstance();
     }
 
     private void verifyPermissions() {
@@ -174,7 +191,29 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(Register.this, "Kayıt İşlemi Başarılı!", Toast.LENGTH_SHORT).show();
+                                    mData = new HashMap<>();
+                                    mUser = mAuth.getCurrentUser();
+
+                                    mData.put("id", mUser.getUid());
+                                    mData.put("isim", name.getText().toString());
+                                    mData.put("soyisim", surname.getText().toString());
+                                    mData.put("giris_yili", enrollmentYear.getText().toString());
+                                    mData.put("mezuniyet_yili", graduationYear.getText().toString());
+                                    mData.put("email_address", email.getText().toString());
+                                    mData.put("profile_photo", currentPhotoPath.toString());
+
+                                    mReference.getReference().child("Kullanicilar").child(mUser.getUid()).setValue(mData)
+                                            .addOnCompleteListener(Register.this, new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        Toast.makeText(Register.this, "Kayıt İşlemi Başarılı!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else{
+                                                        Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
                                 }
                                 else{
                                     Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
