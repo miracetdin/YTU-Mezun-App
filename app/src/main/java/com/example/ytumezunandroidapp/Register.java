@@ -8,10 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,6 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +41,8 @@ public class Register extends AppCompatActivity {
     ImageView photo;
     Button register, takePhoto;
     String currentPhotoPath;
-    User user = null;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +69,16 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(password.getText().toString().equals(password2.getText().toString())) {
-                    Toast.makeText(Register.this, "Kayıt başarılı bir şekilde gerçekleşmiştir. Giriş yapınız.", Toast.LENGTH_LONG).show();
+                    register_user(v);
+                    //Toast.makeText(Register.this, "Kayıt başarılı bir şekilde gerçekleşmiştir. Giriş yapınız.", Toast.LENGTH_LONG).show();
                     // Kayıt ekranında alınan bilgilerle kullanıcı oluşturma
+                    /*
                     user = new User(name.toString(), surname.toString(), email.toString(), password.toString(),
                             enrollmentYear.toString(), graduationYear.toString(), currentPhotoPath);
                     Intent intent = new Intent(getApplicationContext(), Login.class);
                     startActivity(intent);
+
+                     */
                 }
             }
         });
@@ -79,6 +89,8 @@ public class Register extends AppCompatActivity {
                 verifyPermissions();
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     private void verifyPermissions() {
@@ -151,6 +163,29 @@ public class Register extends AppCompatActivity {
                 File f = new File(currentPhotoPath);
                 photo.setImageURI(Uri.fromFile(f));
             }
+        }
+    }
+
+    public void register_user(View view){
+        if(!TextUtils.isEmpty(email.getText().toString()) && !TextUtils.isEmpty(password.getText().toString())){
+            if(password.getText().toString().equals(password2.getText().toString())){
+                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(Register.this, "Kayıt İşlemi Başarılı!", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }else{
+                Toast.makeText(this, "Şifreler Aynı Değil!", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(this, "Email ve Şifre Alanları Boş Olamaz!", Toast.LENGTH_SHORT).show();
         }
     }
 }
