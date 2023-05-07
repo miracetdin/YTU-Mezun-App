@@ -67,43 +67,35 @@ public class ResetPassword extends AppCompatActivity {
 
                 assert  mUser != null;
 
-                mAuth.signInWithEmailLink(email.getText().toString(), mReference.child(mUser.getEmail().toString()).toString());
-
-                mUser.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(ResetPassword.this, "Şifre Güncelleniyor...", Toast.LENGTH_SHORT).show();
-                            mData = new HashMap<>();
-                            mData.put("sifre", newPassword.getText().toString());
-                            mReference = FirebaseDatabase.getInstance().getReference("Kullanicilar").child(mUser.getUid());
-                            mReference.updateChildren(mData)
-                                    .addOnCompleteListener(ResetPassword.this, new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(ResetPassword.this, "Şifre Başarıyla Güncellendi!", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                                startActivity(intent);
-                                            }
-                                            else{
-                                                Toast.makeText(ResetPassword.this, "Şifre Güncellenemedi!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                        }
-                        else {
-                            Toast.makeText(ResetPassword.this, "Şifre Güncellenemedi!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ResetPassword.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+                mAuth.sendPasswordResetEmail(email.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(ResetPassword.this, "E-postayı Kontrol Ediniz...", Toast.LENGTH_SHORT).show();
+                                    mData = new HashMap<>();
+                                    mData.put("sifre", newPassword.getText().toString());
+                                    mReference = FirebaseDatabase.getInstance().getReference("Kullanicilar").child(mUser.getUid());
+                                    mReference.updateChildren(mData)
+                                            .addOnCompleteListener(ResetPassword.this, new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        Toast.makeText(ResetPassword.this, "E-postayı Kontrol Ediniz...", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                        startActivity(intent);
+                                                    }
+                                                    else{
+                                                        Toast.makeText(ResetPassword.this, "Şifre Güncellenemedi!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                                else {
+                                    Toast.makeText(ResetPassword.this, "Şifre Güncellenemedi!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
         }
         else{
             Toast.makeText(this, "Yukarıdaki Alanların Doldurulması Zorunludur!", Toast.LENGTH_SHORT).show();
