@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
                             mReference.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    Intent intent = new Intent(getApplicationContext(), Profile.class);
+                                    Intent intent = new Intent(getApplicationContext(), Menu.class);
                                     startActivity(intent);
                                 }
                                 @Override

@@ -35,27 +35,4 @@
         android:layout_marginBottom="90dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="530dp">
-
-        <Button
-            android:id="@+id/mb_profile"
-            android:layout_width="180dp"
-            android:layout_height="90dp"
-            android:text="@string/mb_profile_text"
-            android:textColor="@color/gray"
-            android:backgroundTint="@color/navy_blue_background"/>
-
-        <Button
-            android:id="@+id/mb_announcement"
-            android:layout_width="180dp"
-            android:layout_height="90dp"
-            android:text="@string/mb_announcement_text"
-            android:textColor="@color/yellow"/>
-
-    </LinearLayout>
-
 </RelativeLayout>

@@ -33,7 +33,6 @@ import java.util.HashMap;
 public class Announcement extends AppCompatActivity {
 
     public static ArrayList<AnnouncementModel> announcementList = new ArrayList<>();
-    Button bt_profile, bt_announcement;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mReference;
@@ -50,8 +49,6 @@ public class Announcement extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_announcement);
 
-        bt_profile = (Button) findViewById(R.id.mb_profile);
-        bt_announcement = (Button) findViewById(R.id.mb_announcement);
 
         // Duyuru listesinin oluşturulması
 
@@ -69,21 +66,6 @@ public class Announcement extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-        bt_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
-                startActivity(intent);
-            }
-        });
-
-        bt_announcement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Announcement.this, "Duyuru ekranındasınız!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         viewAnnouncements();
     }
