@@ -1,5 +1,6 @@
 package com.example.ytumezunandroidapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -64,6 +65,14 @@ public class Profile extends AppCompatActivity {
         updateInfo = (Button) findViewById(R.id.profile_bt_updateInfo);
 
         mAuth = FirebaseAuth.getInstance();
+
+        updateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UpdateInfo.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -93,12 +93,12 @@
 
     <Button
         android:id="@+id/login_bt_forgotMyPassword"
-        android:layout_width="120sp"
+        android:layout_width="180sp"
         android:layout_height="wrap_content"
         android:text="Şifremi Unuttum"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550sp"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/navy_blue"
         android:textColor="@color/white"/>
 
 </RelativeLayout>
